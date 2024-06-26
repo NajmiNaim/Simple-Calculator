@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator with a Message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0f7fa;
+        }
+
+        .calculator {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #result {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.5em;
+            text-align: right;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e0f2f1;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 20px;
+            font-size: 1.5em;
+            background-color: #4db6ac;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #00897b;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #00796b;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="result" readonly>
+        <div class="buttons">
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendOperator('+')">+</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="appendOperator('-')">-</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="appendOperator('*')">*</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="clearResult()">C</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="appendOperator('/')">/</button>
+        </div>
+        <p id="message"></p>
+    </div>
+    <script>
+        function appendNumber(number) {
+            const result = document.getElementById('result');
+            result.value += number;
+        }
+
+        function appendOperator(operator) {
+            const result = document.getElementById('result');
+            result.value += ' ' + operator + ' ';
+        }
+
+        function clearResult() {
+            const result = document.getElementById('result');
+            result.value = '';
+            const message = document.getElementById('message');
+            message.textContent = '';
+        }
+
+        function calculateResult() {
+            const result = document.getElementById('result');
+            try {
+                // Check if the specific expression "1+4+3" is entered
+                if (result.value.replace(/\s+/g, '') === '1+4+3') {
+                    const message = document.getElementById('message');
+                    message.textContent = "Hi Nur Najmin, I've been wanting to tell you something for a while now. Every time we meet, I can't find the courage to say it. So, I made this website just to share this with you. From the first day we met, I've had a crush on you, even though I didn't know your name back then. My feelings for you have only grown stronger. I'm not asking for anything in return; I just needed to let you know how I feel. Even if you don't feel the same, I hope we can remain friends, as we always have been. By the way, did you hear about the mathematician who’s afraid of negative numbers? He’ll stop at nothing to avoid them! 😄 You're very special to me, and I wanted you to know that.";
+                } else {
+                    result.value = eval(result.value.replace(/\s+/g, ''));
+                }
+            } catch {
+                result.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
